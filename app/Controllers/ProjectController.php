@@ -159,8 +159,6 @@ if (!$user) {
             return redirect()->to('/dashboard')->with('error', 'Proyek tidak ditemukan.');
         }
 
-        // Optional: cek apakah user berhak update
-
         $this->projectModel->update($id, ['name' => $name]);
 
         return redirect()->to('/dashboard')->with('success', 'Nama proyek berhasil diperbarui.');

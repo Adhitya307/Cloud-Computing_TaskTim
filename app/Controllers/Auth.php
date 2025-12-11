@@ -38,8 +38,7 @@ public function process_login() {
             'user_id' => $user['id']
         ]);
         
-        // Hapus atau komentar dd() setelah yakin session sudah benar
-        // dd(session()->get());
+
 
         return redirect()->to('/dash');
     }

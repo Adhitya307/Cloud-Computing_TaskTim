@@ -116,14 +116,11 @@
     <button type="submit">Masuk</button>
 
     <div class="links">
-      <a href="/forgot-password">Lupa sandi?</a>
+  
       <a href="/register">Belum punya akun? Daftar</a>
     </div>
 
-    <!-- Tombol Google di tengah -->
-    <div class="google-wrapper">
-      <a href="/google-login" class="google-btn">Masuk dengan Google</a>
-    </div>
+
   </form>
 
 </body>

@@ -1,0 +1,68 @@
+/* royal-theme.css */
+body {
+    background: linear-gradient(to bottom right, #f5f0e6, #e8d8c3);
+    font-family: 'Playfair Display', serif;
+}
+
+.card {
+    border: 2px solid #d4af37;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.01);
+}
+
+.card-header {
+    background: #5D3FD3;
+    color: white;
+    font-weight: bold;
+    font-family: 'Cinzel', serif;
+}
+
+.btn-primary, .btn-success {
+    background-color: #5D3FD3;
+    border: none;
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover, .btn-success:hover {
+    background-color: #4b2fb1;
+}
+
+.role-badge {
+    background-color: #FFD700 !important;
+    color: #000;
+    font-weight: bold;
+    font-family: 'Cinzel', serif;
+    padding: 4px 12px;
+    border-radius: 50px;
+    box-shadow: 0 0 6px rgba(255, 215, 0, 0.6);
+}
+
+.display-6 {
+    font-family: 'Cinzel', serif;
+    color: #5D3FD3;
+}
+
+h5, .modal-title {
+    font-family: 'Cinzel', serif;
+    color: #5D3FD3;
+}
+
+.btn-outline-dark {
+    border: 2px solid #FFD700 !important;
+    color: #5D3FD3 !important;
+    font-weight: 600;
+    font-family: 'Cinzel', serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline-dark:hover {
+    background-color: #FFD700 !important;
+    color: #5D3FD3 !important;
+}

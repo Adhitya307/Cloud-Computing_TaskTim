@@ -1,0 +1,32 @@
+name: Auto Deploy to Container
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy code to Docker container
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: 22
+          script: |
+            docker exec tastim bash -c '
+              git config --global --add safe.directory /var/www/html &&
+              cd /var/www/html &&
+              git reset --hard &&
+              git clean -fd &&
+              git pull origin main &&
+              /usr/local/bin/composer install --no-dev --optimize-autoloader
+            '
+
+#dadadadadsbdabd
+
+
+#dadadadadsbdabd

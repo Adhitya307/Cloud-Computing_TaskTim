@@ -1,0 +1,137 @@
+/* Admin Dashboard - Majestic Theme */
+:root {
+    --royal-purple: #5c2d91;
+    --deep-blue: #1a237e;
+    --gold-accent: #ffd700;
+    --silver-light: #f8f9fa;
+    --dark-velvet: #0f0524;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(145deg, var(--dark-velvet), var(--royal-purple));
+    color: var(--silver-light);
+    background-attachment: fixed;
+    position: relative;
+}
+
+/* Royal Decorative Elements */
+.bg-decor {
+    position: absolute;
+    inset: 0;
+    z-index: -10;
+    overflow: hidden;
+}
+
+.bg-decor .circle {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(80px);
+    opacity: 0.15;
+}
+
+.bg-decor .circle-1 {
+    width: 30rem;
+    height: 30rem;
+    background-color: var(--gold-accent);
+    top: -150px;
+    left: -150px;
+}
+
+.bg-decor .circle-2 {
+    width: 25rem;
+    height: 25rem;
+    background-color: rgba(92, 45, 145, 0.7);
+    bottom: -120px;
+    right: -120px;
+}
+
+.bg-decor .circle-3 {
+    width: 20rem;
+    height: 20rem;
+    background-color: rgba(26, 35, 126, 0.6);
+    top: 50%;
+    left: 30%;
+}
+
+/* Navbar - Royal Crown Style */
+nav {
+    background: linear-gradient(135deg, var(--royal-purple), var(--deep-blue)) !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+nav a:hover {
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+/* Project Card - Regal Design */
+.project-card {
+    background: rgba(15, 5, 36, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    color: var(--silver-light);
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.project-card .progress-fill {
+    background: linear-gradient(90deg, var(--gold-accent), #ffab00);
+}
+
+/* Empty State - Royal Empty Throne */
+.empty-state {
+    background: rgba(15, 5, 36, 0.8);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    color: var(--silver-light);
+}
+
+.empty-state .text-indigo-400 {
+    color: var(--gold-accent) !important;
+}
+
+/* Flash Message - Royal Decree */
+.animate-fade-in {
+    background: linear-gradient(135deg, var(--royal-purple), var(--deep-blue)) !important;
+    border-left: 4px solid var(--gold-accent);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* User Dropdown - Royal Menu */
+#userMenuDropdown {
+    background: rgba(15, 5, 36, 0.95);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+#userMenuDropdown a:hover {
+    background: rgba(255, 215, 0, 0.1) !important;
+    color: var(--gold-accent) !important;
+}
+
+/* Task Counters - Royal Jewels */
+.bg-indigo-50 { background: rgba(92, 45, 145, 0.2) !important; }
+.bg-yellow-50 { background: rgba(255, 215, 0, 0.2) !important; }
+.bg-green-50 { background: rgba(0, 128, 0, 0.2) !important; }
+.text-indigo-600 { color: #b388ff !important; }
+.text-yellow-600 { color: var(--gold-accent) !important; }
+.text-green-600 { color: #69f0ae !important; }
+
+/* Text Colors */
+.text-gray-800 { color: var(--silver-light) !important; }
+.text-gray-500 { color: #b0bec5 !important; }
+.text-gray-900 { color: white !important; }
+
+/* Project Header - Royal Banner */
+.project-card > div:first-child {
+    background: linear-gradient(135deg, var(--royal-purple), var(--deep-blue)) !important;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+}

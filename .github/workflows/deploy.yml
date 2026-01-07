@@ -9,12 +9,12 @@ jobs:
   deploy_to_vps:
     runs-on: ubuntu-latest
     steps:
-      # Ambil source code terbaru
+      # Checkout repo
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Sync folder app ke VPS
-      - name: Sync app files to VPS
+      # Sync folder cc_tasktim ke VPS
+      - name: Sync cc_tasktim to VPS
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -25,7 +25,7 @@ jobs:
           target: "/home/adit/tasktim_docker/cc_tasktim"
           rm: false   # overwrite file yang berubah saja
 
-      # Clear CI4 cache & regenerate autoload, reload PHP-FPM
+      # Clear cache CI4 & Composer autoload di container
       - name: Refresh container
         uses: appleboy/ssh-action@master
         with:
@@ -34,9 +34,6 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: 22
           script: |
-            # Clear CI4 cache
             docker exec tastim bash -c "cd /var/www/html && php spark cache:clear || true"
-            # Regenerate Composer autoload
             docker exec tastim bash -c "cd /var/www/html && composer dump-autoload -o || true"
-            # Optional: reload PHP-FPM to pick up changes
             docker exec tastim bash -c "pkill -o -USR2 php-fpm || true"

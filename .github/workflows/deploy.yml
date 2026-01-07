@@ -9,11 +9,11 @@ jobs:
   deploy_to_vps:
     runs-on: ubuntu-latest
     steps:
-      # Ambil source code terbaru dari repo
+      # Ambil source code terbaru
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Sync folder cc_tasktim ke VPS
+      # Sync folder app ke VPS
       - name: Sync app files to VPS
         uses: appleboy/scp-action@master
         with:
@@ -25,8 +25,8 @@ jobs:
           target: "/home/adit/tasktim_docker/cc_tasktim"
           rm: false   # overwrite file yang berubah saja
 
-      # Restart container agar perubahan langsung diterapkan
-      - name: Reload container on VPS
+      # Clear CI4 cache & regenerate autoload, reload PHP-FPM
+      - name: Refresh container
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -34,9 +34,9 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: 22
           script: |
-            if docker ps -a --format '{{.Names}}' | grep -Eq '^tastim$'; then
-              echo "Restarting container 'tastim'..."
-              docker restart tastim
-            else
-              echo "Container 'tastim' tidak ada. Silakan start container manual."
-            fi
+            # Clear CI4 cache
+            docker exec tastim bash -c "cd /var/www/html && php spark cache:clear || true"
+            # Regenerate Composer autoload
+            docker exec tastim bash -c "cd /var/www/html && composer dump-autoload -o || true"
+            # Optional: reload PHP-FPM to pick up changes
+            docker exec tastim bash -c "pkill -o -USR2 php-fpm || true"

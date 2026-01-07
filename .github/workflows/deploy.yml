@@ -21,8 +21,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: ./cc_tasktim
-          file: ./cc_tasktim/Dockerfile
+          context: .                   # root folder repo
+          file: ./Dockerfile           # Dockerfile di root repo
           push: true
           tags: adityabp18/tasktim_docker:latest
 

@@ -18,11 +18,13 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      # Hanya build image jika ada perubahan pada composer.json / Dockerfile
       - name: Build and push Docker image
+        if: github.event_name == 'push' && (contains(github.event.head_commit.message, '[deps]') || contains(github.event.head_commit.added, 'composer.json') || contains(github.event.head_commit.modified, 'composer.json') || contains(github.event.head_commit.modified, 'Dockerfile'))
         uses: docker/build-push-action@v4
         with:
-          context: .                   # root folder repo
-          file: ./Dockerfile           # Dockerfile di root repo
+          context: .
+          file: ./Dockerfile
           push: true
           tags: adityabp18/tasktim_docker:latest
 
@@ -30,7 +32,17 @@ jobs:
     runs-on: ubuntu-latest
     needs: build_and_push
     steps:
-      - name: Deploy to VPS
+      - name: Sync app files to VPS
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: 22
+          source: "cc_tasktim/"
+          target: "/home/adit/tasktim_docker/cc_tasktim"
+
+      - name: Restart container on VPS
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -40,5 +52,6 @@ jobs:
           script: |
             docker stop tastim || true
             docker rm tastim || true
-            docker pull adityabp18/tasktim_docker:latest
-            docker run -d --name tastim -p 80:80 adityabp18/tasktim_docker:latest
+            docker run -d --name tastim -p 80:80 \
+              -v /home/adit/tasktim_docker/cc_tasktim:/var/www/html \
+              adityabp18/tasktim_docker:latest

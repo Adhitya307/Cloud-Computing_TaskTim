@@ -6,33 +6,14 @@ on:
       - main
 
 jobs:
-  build_and_push:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: adityabp18/tasktim_docker:latest
-
   deploy_to_vps:
     runs-on: ubuntu-latest
-    needs: []
     steps:
+      # Ambil source code terbaru
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # Sync folder app ke VPS
       - name: Sync app files to VPS
         uses: appleboy/scp-action@master
         with:
@@ -42,8 +23,10 @@ jobs:
           port: 22
           source: "cc_tasktim"
           target: "/home/adit/tasktim_docker/cc_tasktim"
-          rm: false   # update only
+          rm: false   # overwrite file yang berubah saja
 
+      # Optional: jalankan composer install kalau ada package baru
+      # Restart container jika perlu
       - name: Reload container on VPS
         uses: appleboy/ssh-action@master
         with:
@@ -53,4 +36,4 @@ jobs:
           port: 22
           script: |
             docker exec tastim bash -c "cd /var/www/html && composer install --no-dev --optimize-autoloader || true"
-            docker restart tastim
+            docker restart tastim || true

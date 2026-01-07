@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  tastim:
+    build: .
+    container_name: tastim
+    ports:
+      - "80:80"
+      - "3306:3306"
+    volumes:
+      - ./cc_tasktim:/var/www/html
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: manajemen_tugastim
+      MYSQL_USER: adit
+      MYSQL_PASSWORD: 123

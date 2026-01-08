@@ -221,50 +221,6 @@
         </div>
     </div>
 </section>
-
-<!-- Team Section -->
-<section class="about-team max-w-7xl mx-auto px-4 py-12">
-    <h2 class="section-title text-center text-3xl font-bold mb-2">Tim Kami</h2>
-    <p class="section-subtitle text-center text-gray-600 mb-8">Orang-orang berbakat di balik kesuksesan TaskTim</p>
-    
-    <div class="team-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        <?php foreach ($team as $member): ?>
-        <div class="team-card perspective group">
-            <div class="team-card-inner relative w-full h-72 transition-transform duration-500 transform-style-preserve-3d group-hover:rotate-y-180">
-                <!-- Front -->
-                <div class="team-card-front absolute w-full h-full backface-hidden rounded-lg overflow-hidden shadow-lg flex flex-col items-center justify-center bg-white p-6">
-                    <img src="<?= esc($member['foto']) ?>" alt="<?= esc($member['nama']) ?>" class="team-photo rounded-full w-24 h-24 object-cover mb-4" />
-                    <h3 class="team-name font-semibold text-lg"><?= esc($member['nama']) ?></h3>
-                    <p class="team-position text-gray-500"><?= esc($member['jabatan']) ?></p>
-                </div>
-                <!-- Back -->
-                <div class="team-card-back absolute w-full h-full backface-hidden rotate-y-180 rounded-lg overflow-hidden shadow-lg bg-purple-600 text-white p-6 flex flex-col justify-center items-center text-center">
-                    <p class="team-bio text-sm"><?= esc($member['bio']) ?></p>
-                    <div class="team-social mt-4 flex gap-4">
-                        <?php if (!empty($member['linkedin'])): ?>
-                            <a href="<?= esc($member['linkedin']) ?>" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn <?= esc($member['nama']) ?>">
-                                <i class="fab fa-linkedin fa-lg"></i>
-                            </a>
-                        <?php endif; ?>
-                        <?php if (!empty($member['twitter'])): ?>
-                            <a href="<?= esc($member['twitter']) ?>" target="_blank" rel="noopener noreferrer" aria-label="Twitter <?= esc($member['nama']) ?>">
-                                <i class="fab fa-twitter fa-lg"></i>
-                            </a>
-                        <?php endif; ?>
-                        <?php if (!empty($member['github'])): ?>
-                            <a href="<?= esc($member['github']) ?>" target="_blank" rel="noopener noreferrer" aria-label="GitHub <?= esc($member['nama']) ?>">
-                                <i class="fab fa-github fa-lg"></i>
-                            </a>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <?php endforeach; ?>
-    </div>
-</section>
-
-
 <!-- Footer -->
 <footer class="bg-gray-900 text-gray-400 py-8 text-center text-sm">
     <p>&copy; <?= date('Y') ?> TaskTim. Semua hak cipta dilindungi.</p>

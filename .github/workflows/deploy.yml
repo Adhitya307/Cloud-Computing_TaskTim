@@ -9,8 +9,7 @@ jobs:
   deploy_to_vps:
     runs-on: ubuntu-latest
     steps:
-      # Pull latest code & refresh container
-      - name: Pull latest code and refresh container on VPS
+      - name: Deploy code to container on VPS
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -18,25 +17,19 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: 22
           script: |
-            # Masuk ke folder project
             cd /home/adit/tasktim_docker/cc_tasktim
-
-            # Reset perubahan lokal, hapus file yang tidak ada di repo
             git reset --hard
             git clean -fd
-
-            # Pull code terbaru dari main branch
             git pull origin main
 
-            echo "✅ Code updated"
+            # Copy kode ke container
+            docker cp . tastim:/var/www/html
 
-            # Clear CI4 cache
+            # Clear cache & autoload
             docker exec tastim bash -c "cd /var/www/html && php spark cache:clear || true"
-
-            # Regenerate Composer autoload
             docker exec tastim bash -c "cd /var/www/html && composer dump-autoload -o || true"
 
-            # Restart PHP-FPM agar perubahan langsung terlihat
+            # Restart PHP-FPM
             docker exec tastim bash -c "pkill -o -USR2 php-fpm || true"
 
-            echo "✅ Container refreshed"
+            echo "✅ Web updated"

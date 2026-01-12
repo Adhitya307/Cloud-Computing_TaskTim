@@ -108,7 +108,7 @@
 <body>
 
   <form method="post" action="/login">
-    <h2>Login duluu mass</h2>
+    <h2>Login duluu mass yaaa</h2>
 
     <input type="email" name="email" placeholder="Email" required>
     <input type="password" name="password" placeholder="Sandi" required>
